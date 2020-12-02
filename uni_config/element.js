@@ -1,18 +1,18 @@
 /**
- * 按需打包 element UI组件
- * npm i @babel/preset-env -D
+ * 按需打包 element plus UI组件
+ * npm install element-plus --save
+ * npm install babel-plugin-component -D
  * @type {{}}
  */
 module.exports = {
     presets: [
-        '@vue/cli-plugin-babel/preset',
-        ["@babel/preset-env", { "modules": false }]
+        '@vue/cli-plugin-babel/preset'
     ],
     "plugins": [
         [
             "component",
             {
-                "libraryName": "element-ui",
+                "libraryName": "element-plus",
                 "styleLibraryName": "theme-chalk"
             }
         ]

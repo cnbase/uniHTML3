@@ -28,7 +28,7 @@
 uni_config 框架配置目录（主要的配置目录）
 uni_config/config.js 框架配置文件，非常重要！
 uni_config/apiData.js 本地开发环境，api调试模拟数据
-uni_config/element.js 按需引入element组件库时，babel配置（配合config内babelName使用）
+uni_config/element.js 按需引入element plus组件库时，babel配置（配合config内babelName使用）
 src/components 公共组件
 src/uni_html 模板库目录（主要的开发目录）
 src/uni_html/模板名称/模块名称/pages.js 模块页面build配置
@@ -39,7 +39,7 @@ src/uni_tools/url.js 浏览器url相关处理函数
 src/uni_tools/api.js 封装好的ajax请求函数
 ```
 
-**3. 配置 `按需/全量` 引入 `elementUI` 组件**
+**3. 配置 `按需/全量` 引入 `elementUI plus` 组件**
 
     查看 `uni_config/config.js` 文件中 `babelMode` 配置
     `babelMode = true;//全量引入`
@@ -53,17 +53,33 @@ src/uni_tools/api.js 封装好的ajax请求函数
 * 按需引入组件：
 
 ```
-import {
-    Container
-} from 'element-ui';
-Vue.use(Container);
+import { createApp } from 'vue'
+import { ElButton, ElSelect } from 'element-plus';
+import App from './Index.vue';
+
+const app = createApp(App)
+app.component(ElButton.name, ElButton);
+app.component(ElSelect.name, ElSelect);
+
+/* or
+ * app.use(ElButton)
+ * app.use(ElSelect)
+ */
+
+app.mount('#app')
 ```
 
 * 全量引入组件：
 
 ```
-import ElementUI from 'element-ui'
-Vue.use(ElementUI);
+import { createApp } from 'vue'
+import ElementPlus from 'element-plus';
+import 'element-plus/lib/theme-chalk/index.css';
+import App from './Index.vue';
+
+const app = createApp(App)
+app.use(ElementPlus)
+app.mount('#app')
 ```
 
 **5. 打包构建方式的选择**

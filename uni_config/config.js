@@ -128,7 +128,7 @@ const babelMode = true;
  * 按需打包时，对应的 babel.config 配置文件名
  * @type {string}
  */
-const babelName = '';
+const babelName = 'element';
 
 /**
  * 返回按需打包时babel配置文件路径
