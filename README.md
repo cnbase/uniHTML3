@@ -29,6 +29,7 @@ uni_config 框架配置目录（主要的配置目录）
 uni_config/config.js 框架配置文件，非常重要！
 uni_config/apiData.js 本地开发环境，api调试模拟数据
 uni_config/element.js 按需引入element plus组件库时，babel配置（配合config内babelName使用）
+uni_config/vant_next.js 按需引入vant组件库时，babel配置（配合config内babelName使用）
 src/components 公共组件
 src/uni_html 模板库目录（主要的开发目录）
 src/uni_html/模板名称/模块名称/pages.js 模块页面build配置
@@ -53,6 +54,7 @@ src/uni_tools/api.js 封装好的ajax请求函数
 * 按需引入组件：
 
 ```
+//element
 import { createApp } from 'vue'
 import { ElButton, ElSelect } from 'element-plus';
 import App from './Index.vue';
@@ -69,9 +71,15 @@ app.component(ElSelect.name, ElSelect);
 app.mount('#app')
 ```
 
+```
+//vant
+import { Button } from 'vant';
+```
+
 * 全量引入组件：
 
 ```
+//element
 import { createApp } from 'vue'
 import ElementPlus from 'element-plus';
 import 'element-plus/lib/theme-chalk/index.css';
@@ -80,6 +88,16 @@ import App from './Index.vue';
 const app = createApp(App)
 app.use(ElementPlus)
 app.mount('#app')
+```
+
+```
+//vant
+import { createApp } from 'vue';
+import Vant from 'vant';
+import 'vant/lib/index.css';
+
+const app = createApp();
+app.use(Vant);
 ```
 
 **5. 打包构建方式的选择**
