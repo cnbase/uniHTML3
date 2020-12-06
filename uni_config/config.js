@@ -138,6 +138,23 @@ const getBabelConfigPath = function () {
     return './uni_config/'+babelName;
 }
 
+/**
+ * postcss
+ * @type {boolean}
+ */
+const postcssMode = false;
+
+/**
+ * postcss配置文件路径
+ * @returns {string|boolean}
+ */
+const getPostcssConfig = function () {
+    if (postcssMode) {
+        return './uni_config/postcss.js';
+    }
+    return false;
+}
+
 module.exports = {
     devMode,
     apiData,
@@ -152,5 +169,6 @@ module.exports = {
     getPageUrl,
     getModulePage,
     getModulePages,
-    getBabelConfigPath
+    getBabelConfigPath,
+    getPostcssConfig
 }
