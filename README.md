@@ -38,6 +38,7 @@ src/uni_tools/string.js 随机字符函数
 src/uni_tools/ajax.js 封装的axios函数(使用前先安装axios,模拟数据时该文件内devMode设置为true)
 src/uni_tools/url.js 浏览器url相关处理函数
 src/uni_tools/api.js 封装好的ajax请求函数
+uni_static/* 构建时不编译直接copy的文件，按应用名区分
 ```
 
 **3. 配置 `按需/全量` 引入 `elementUI plus` 组件**
@@ -130,6 +131,7 @@ apiUrl:'', #接口域名
 devMode:true, #开发模式
 getApiUrl：正式模式，请求实际 api 接口
 apiData：开发模式时，需要配置模拟数据js文件路径
+copyFiles: 无需编译，直接copy的文件，依赖copy-webpack-plugin插件
 ```
 
 ### 常见问题

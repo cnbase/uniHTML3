@@ -1,3 +1,5 @@
+const path = require('path')
+
 /**
  * 是否开发模式
  * @type {boolean}
@@ -50,6 +52,15 @@ const outputDir = './dist/index';
  * @type {string}
  */
 const assetsDir = 'static';
+
+/**
+ * 无需编译，直接copy的文件
+ * 依赖copy-webpack-plugin插件，不要引入7.0高版本
+ * npm install copy-webpack-plugin@6.4.1 --save-dev
+ */
+const copyFiles = [
+    { from: path.resolve(__dirname, '../uni_static/'+moduleName),force: true}
+];
 
 /**
  * 构建方式
@@ -162,6 +173,7 @@ module.exports = {
     outputDir,
     assetsDir,
     moduleName,
+    copyFiles,
     pageName,
     babelMode,
     buildMode,

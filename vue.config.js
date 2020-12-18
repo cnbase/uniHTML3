@@ -6,8 +6,28 @@
  */
 
 let uniConfig = require('./uni_config/config')
+let vueConfig = {}
 
-let vueConfig = {
+if (uniConfig.copyFiles.length > 0){
+    //npm install copy-webpack-plugin@6.4.1 --save-dev
+    const CopyWebpackPlugin = require('copy-webpack-plugin')
+    vueConfig = {
+        outputDir:uniConfig.outputDir,
+        assetsDir:uniConfig.assetsDir,
+        configureWebpack: {
+            plugins:[new CopyWebpackPlugin({
+                patterns:uniConfig.copyFiles
+            })]
+        }
+    };
+} else {
+    vueConfig = {
+        outputDir:uniConfig.outputDir,
+        assetsDir:uniConfig.assetsDir,
+    };
+}
+
+vueConfig = {
     outputDir:uniConfig.outputDir,
     assetsDir:uniConfig.assetsDir,
 };
