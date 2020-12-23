@@ -27,11 +27,6 @@ if (uniConfig.copyFiles.length > 0){
     };
 }
 
-vueConfig = {
-    outputDir:uniConfig.outputDir,
-    assetsDir:uniConfig.assetsDir,
-};
-
 if (uniConfig.buildMode){
     //全页面打包
     vueConfig = {...vueConfig,...uniConfig.getModulePages()};

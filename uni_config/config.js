@@ -59,7 +59,7 @@ const assetsDir = 'static';
  * npm install copy-webpack-plugin@6.4.1 --save-dev
  */
 const copyFiles = [
-    { from: path.resolve(__dirname, '../uni_static/'+moduleName),force: true}
+    { from: path.resolve(__dirname, '../uni_static/'+uniName+'/'+moduleName),force: true}
 ];
 
 /**
