@@ -1,4 +1,11 @@
 /**
+ * URL 处理函数
+ * 使用方法：
+ * import uniUrl from "@/uni_tools/uni_url"
+ * uniUrl.getParams(); uniUrl.get(param);
+ */
+
+/**
  * 获取当前URLSearchParams对象
  * @returns {URLSearchParams}
  */

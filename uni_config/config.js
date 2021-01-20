@@ -1,27 +1,26 @@
-const path = require('path')
-
 /**
- * 是否开发模式
- * @type {boolean}
- */
-const devMode = false;
-
-/**
- * 本地模拟api数据
- */
-let apiData = {};
-
-/**
- * 开发模式，请打开注释
- * @type {{}}
- */
-//apiData = require('./apiData');
-
-/**
- * 访问url
+ * 项目名称
  * @type {string}
  */
-const siteUrl = '/';
+const uniName = 'default';
+
+/**
+ * 项目模板名称，如后台admin,前台index
+ * @type {string}
+ */
+const moduleName = 'index';
+
+/**
+ * api请求时，是否采用模拟数据返回
+ * true:返回模拟api数据，用于开发模式
+ */
+const apiMode = false;
+
+/**
+ * 模拟数据文件名
+ * apiMode=true时，一定要填写！！！
+ */
+const apiFilePath = '../uni_api_data/'+uniName+'/'+moduleName+'.js';
 
 /**
  * API地址
@@ -30,22 +29,20 @@ const siteUrl = '/';
 const apiUrl = '/';
 
 /**
- * 模板组名称
- * @type {string}
+ * 编译后，是否需要copy文件
+ * 依赖copy-webpack-plugin插件，不要引入7.0高版本
+ * npm install copy-webpack-plugin@6.4.1 --save-dev
+ * 应用场景：构建后，一些静态资源直接copy到项目打包目录
+ * 默认copy目录：../uni_static/uniName/moduleName/
+ * 如需额外自定义copy文件，请修改下面的getCopyFiles方法
  */
-const uniName = 'default';
-
-/**
- * 模块的模板名称，如后台admin,前台index
- * @type {string}
- */
-const moduleName = 'index';
+const copyMode = false;
 
 /**
  * 构建目录，相对vue.config.js目录
  * @type {string}
  */
-const outputDir = './dist/index';
+const outputDir = './dist/' + moduleName;
 
 /**
  * 静态目录名称，相对于outputDir
@@ -54,19 +51,10 @@ const outputDir = './dist/index';
 const assetsDir = 'static';
 
 /**
- * 无需编译，直接copy的文件
- * 依赖copy-webpack-plugin插件，不要引入7.0高版本
- * npm install copy-webpack-plugin@6.4.1 --save-dev
- */
-const copyFiles = [
-    { from: path.resolve(__dirname, '../uni_static/'+uniName+'/'+moduleName),force: true}
-];
-
-/**
  * 构建方式
- * 注意：每次打包都会删除原构建目录所有文件重新打包
- * true:全页面构建，打包全部文件
- * false:单页面构建，单独打包
+ * 注：不管如何配置，vue每次打包都会删除原构建目录所有文件重新打包
+ * true:全页面构建，生成全部模板文件
+ * false:单页面构建，仅生成单页面文件
  * @type {boolean}
  */
 const buildMode = true;
@@ -75,47 +63,63 @@ const buildMode = true;
  * 单页面构建[buildMode=true]时，页面名称
  * @type {string}
  */
-const pageName = 'menu';
+const pageName = 'index';
 
 /**
- * 模板 对应页面配置文件路径
+ * 项目模板-页面构建配置文件(pages.js)路径
  * @type {string}
  */
-const pagesPath = '../src/uni_html/'+uniName+'/'+moduleName+'/pages';
+const pagesJsPath = '../src/uni_html/'+uniName+'/'+moduleName+'/pages';
 
 /**
- * 载入模板页面配置
+ * 返回页面构建参数
  */
-const pages = require(pagesPath);
-
-/**
- * 单页面构建
- */
-const getModulePage = function () {
-    return {
-        pages:{
-            [`${pageName}`]:pages[`${pageName}`]
-        },
-    };
+const getPagesJs = function () {
+    if (buildMode) {
+        //全页面构建
+        return {
+            pages: require(pagesJsPath),
+        };
+    } else {
+        //单页面构建
+        return {
+            pages:{
+                [`${pageName}`]: require(pagesJsPath)[`${pageName}`]
+            },
+        };
+    }
 }
 
 /**
- * 全页面构建
- * @returns {{pages: *}}
+ * 模拟Api数据
  */
-const getModulePages = function (){
-    return {
-        pages:pages,
-    };
+const getApiData = function() {
+    if (apiMode && apiFilePath) {
+        return require(apiFilePath);
+    } else {
+        return false;
+    }
 }
 
 /**
- * 获取页面url
- * @param page
- * @returns {string}
+ * 无需编译，直接copy的文件列表
+ * 依赖copy-webpack-plugin插件，不要引入7.0高版本
+ * npm install copy-webpack-plugin@6.4.1 --save-dev
  */
-const getPageUrl = function (page) {
-    return siteUrl+page;
+const getCopyFiles = function() {
+    if (copyMode) {
+        const path = require('path')
+        const CopyWebpackPlugin = require('copy-webpack-plugin')
+        return {
+            plugins:[new CopyWebpackPlugin({
+                patterns: [
+                    { from: path.resolve(__dirname, '../uni_static/'+uniName+'/'+moduleName),force: true}
+                ]
+            })]
+        }
+    } else {
+        return {};
+    }
 }
 
 /**
@@ -128,59 +132,20 @@ const getApiUrl = function (api) {
 }
 
 /**
- * 打包模式
- * true:全量打包
- * false:按需打包
- * @type {boolean}
+ * 汇总 vue 配置项
  */
-const babelMode = true;
-
-/**
- * 按需打包时，对应的 babel.config 配置文件名
- * @type {string}
- */
-const babelName = 'element';
-
-/**
- * 返回按需打包时babel配置文件路径
- * @returns {string}
- */
-const getBabelConfigPath = function () {
-    return './uni_config/'+babelName;
-}
-
-/**
- * postcss
- * @type {boolean}
- */
-const postcssMode = false;
-
-/**
- * postcss配置文件路径
- * @returns {string|boolean}
- */
-const getPostcssConfig = function () {
-    if (postcssMode) {
-        return './uni_config/postcss.js';
-    }
-    return false;
+const vueConfig = {
+    outputDir,
+    assetsDir,
+    configureWebpack: getCopyFiles()
 }
 
 module.exports = {
-    devMode,
-    apiData,
     uniName,
-    outputDir,
-    assetsDir,
     moduleName,
-    copyFiles,
-    pageName,
-    babelMode,
-    buildMode,
+    apiMode,
+    vueConfig,
+    getPagesJs,
+    getApiData,
     getApiUrl,
-    getPageUrl,
-    getModulePage,
-    getModulePages,
-    getBabelConfigPath,
-    getPostcssConfig
 }

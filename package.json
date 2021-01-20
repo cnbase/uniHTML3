@@ -1,6 +1,6 @@
 {
-  "name": "uni_html",
-  "version": "3.0.0",
+  "name": "uni_html3_dev",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "element-plus": "^1.0.1-beta.2",
     "vue": "^3.0.0"
   },
   "devDependencies": {
@@ -18,7 +17,6 @@
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
-    "babel-plugin-component": "^1.1.1",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0"
   },

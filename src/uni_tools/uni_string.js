@@ -1,9 +1,12 @@
 /**
- * 生成随机字符串
+ * 生成指定长度的随机字符串
+ * 使用方法：
+ * import uniString from "@/uni_tools/uni_string"
+ * uniString.random();
  * @param len
  * @returns {string}
  */
-const randomStr = function (len){
+const random = function (len){
     len = len || 8
     let _char = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     let pos = _char.length
@@ -15,5 +18,5 @@ const randomStr = function (len){
 }
 
 export default {
-    randomStr
+    random
 }

@@ -1,6 +1,9 @@
 /**
  * 安装依赖
  * npm install axios --save
+ * 使用方法：
+ * import uniAjax from "@/uni_tools/uni_ajax"
+ * uniAjax.post(); uniAjax.get(); uniAjax.formPost();
  */
 import axios from 'axios'
 
@@ -119,14 +122,7 @@ const _get = function (url,data,config) {
 
 const get = _get;
 const formPost = _formPost;
-
-/**
- * 开发模式，post转get
- * 因开发模式，请求本地apiData数据，不支持post，故此处post按get方式组建数据提交
- */
-let devMode = false;
-
-const post = devMode?_get:_post;
+const post = _post;
 
 export default {
     post,

@@ -1,5 +1,5 @@
 /**
- * 前台模块[index]页面
+ * [index]模板页面
  */
 const path = 'src/uni_html/default/index';
 const pages = {
