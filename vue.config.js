@@ -10,6 +10,6 @@ const extraConfig = require('./uni_config/extra').vueConfig
 
 module.exports = {
     ...vueConfig,
-    ...extraConfig
+    ...extraConfig,
     ...getPagesJs()
 }
