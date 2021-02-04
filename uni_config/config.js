@@ -39,6 +39,13 @@ const apiUrl = '/';
 const copyMode = false;
 
 /**
+ * 部署应用时的基本URL
+ * 部署在 https://www.my-app.com/my-app/，则设置为 /my-app/
+ * 相对路径：设置为空字符串 ('') 或是相对路径 ('./')
+ */
+const publicPath = './';
+
+/**
  * 构建目录，相对vue.config.js目录
  * @type {string}
  */
@@ -135,6 +142,7 @@ const getApiUrl = function (api) {
  * 汇总 vue 配置项
  */
 const vueConfig = {
+    publicPath,
     outputDir,
     assetsDir,
     configureWebpack: getCopyFiles()
