@@ -19,7 +19,6 @@ const _ajax = function (method,url,data,config) {
         }
     } else {
         //正式环境，发起请求
-        url = getApiUrl(url);
         switch (method){
             case 'get':
                 return uniAjax.get(url,data,config);
