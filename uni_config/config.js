@@ -17,16 +17,10 @@ const moduleName = 'index';
 const apiMode = false;
 
 /**
- * 模拟数据文件名,不含首个/
- * apiMode=true时，一定要填写！！！
- */
-const apiFilePath = 'uni_api_data.json';
-
-/**
  * API地址
  * @type {string}
  */
-const apiUrl = '/';
+const apiUrl = '';
 
 /**
  * 编译后，是否需要copy文件
@@ -104,7 +98,7 @@ const getPagesJs = function () {
  */
 const getApiUrl = function (api) {
     if (apiMode) {
-        return apiUrl+apiFilePath;
+        return apiUrl+api+'.json';
     } else {
         return apiUrl+api;
     }
