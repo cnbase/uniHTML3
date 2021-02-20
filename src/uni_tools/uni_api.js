@@ -2,29 +2,21 @@
  * 基于uniHTML框架规范，封装的接口ajax处理函数
  * 依赖uni_config及uni_ajax
  */
-import { apiMode,getApiData,getApiUrl } from '../../uni_config/config'
+import { apiMode,getApiUrl } from '../../uni_config/config'
 import uniAjax from "./uni_ajax";
 
 const _ajax = function (method,url,data,config) {
+    url = getApiUrl(url);
     if (apiMode){
         //开发模式，读取api文件，返回结果
-        return new Promise(function (resolve, reject){
-            try {
-                let apiData = getApiData();
-                if (apiData === false){
-                    console.log(url)
-                    resolve({code:500,data:{},msg:'接口文件错误'});
-                } else {
-                    if (typeof apiData[`${url}`] === "undefined") {
-                        resolve({code:501,data:{},msg:'接口数据错误'});
-                    } else {
-                        resolve(apiData[`${url}`]);
-                    }
-                }
-            } catch (e) {
-                reject(e);
-            }
-        });
+        switch (method){
+            case 'get':
+                return uniAjax.get(url,data,config);
+            case 'post':
+                return uniAjax.get(url,data,config);
+            case 'formPost':
+                return uniAjax.get(url,data,config);
+        }
     } else {
         //正式环境，发起请求
         url = getApiUrl(url);

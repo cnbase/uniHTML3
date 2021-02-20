@@ -17,10 +17,10 @@ const moduleName = 'index';
 const apiMode = false;
 
 /**
- * 模拟数据文件名
+ * 模拟数据文件名,不含首个/
  * apiMode=true时，一定要填写！！！
  */
-const apiFilePath = '../uni_api_data/'+uniName+'/'+moduleName+'.js';
+const apiFilePath = 'uni_api_data.json';
 
 /**
  * API地址
@@ -98,44 +98,16 @@ const getPagesJs = function () {
 }
 
 /**
- * 模拟Api数据
- */
-const getApiData = function() {
-    if (apiMode && apiFilePath) {
-        return require(apiFilePath);
-    } else {
-        return false;
-    }
-}
-
-/**
- * 无需编译，直接copy的文件列表
- * 依赖copy-webpack-plugin插件，不要引入7.0高版本
- * npm install copy-webpack-plugin@6.4.1 --save-dev
- */
-const getCopyFiles = function() {
-    if (copyMode) {
-        const path = require('path')
-        const CopyWebpackPlugin = require('copy-webpack-plugin')
-        return {
-            plugins:[new CopyWebpackPlugin({
-                patterns: [
-                    { from: path.resolve(__dirname, '../uni_static/'+uniName+'/'+moduleName),force: true}
-                ]
-            })]
-        }
-    } else {
-        return {};
-    }
-}
-
-/**
  * 组装 api url
  * @param api
  * @returns {string}
  */
 const getApiUrl = function (api) {
-    return apiUrl+api;
+    if (apiMode) {
+        return apiUrl+apiFilePath;
+    } else {
+        return apiUrl+api;
+    }
 }
 
 /**
@@ -145,7 +117,6 @@ const vueConfig = {
     publicPath,
     outputDir,
     assetsDir,
-    configureWebpack: getCopyFiles()
 }
 
 module.exports = {
@@ -154,6 +125,5 @@ module.exports = {
     apiMode,
     vueConfig,
     getPagesJs,
-    getApiData,
     getApiUrl,
 }

@@ -36,8 +36,8 @@ uni_config/extra/xxx.js 按需配置文件
 uni_config/extra/default.config.js vue-cli默认配置
 uni_config/extra/element_plus.js element plus配置
 uni_config/extra/vant_next.js vant vue3版的配置文件
-uni_api_data/${uniName}/${moduleName}.js 模拟接口开发调试（apiMode=true）时，api数据文件
 uni_static/${uniName}/${moduleName}/* 构建时不编译直接copy的文件，按项目/模板名称区分
+uni_static/${uniName}/${moduleName}/uni_api_data.json 模拟接口开发调试（apiMode=true）时，api数据文件
 src/components 公共组件
 src/uni_html 模板库目录（主要的开发目录）
 src/uni_html/${uniName}/${moduleName}/pages.js 模板所有页面的build配置
