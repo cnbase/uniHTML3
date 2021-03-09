@@ -19,19 +19,9 @@ const _post = function (url,data,config){
     data = data || {}
     config = config || {}
     config = {
-        headers: {'X-Requested-With': 'XMLHttpRequest','Content-Type':'application/x-www-form-urlencoded'},
+        headers: {'X-Requested-With': 'XMLHttpRequest','Content-Type':'application/json;charset=UTF-8'},
         responseType: 'json',
-        ...config,
-        transformRequest: [function (data) {
-            // 对 data 进行任意转换处理
-            let searchParams = new URLSearchParams();
-            for (let i in data){
-                if (Object.prototype.hasOwnProperty.call(data,i)){
-                    searchParams.append(i,data[i]);
-                }
-            }
-            return searchParams;
-        }],
+        ...config
     }
     return new Promise(function (resolve,reject){
         axios.post(url,data,config).then(function (response){
