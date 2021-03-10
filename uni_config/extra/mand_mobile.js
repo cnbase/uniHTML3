@@ -1,6 +1,6 @@
 /**
- * vant vue3版本UI组件
- * npm i vant@next -S
+ * mand mobile2 UI组件
+ * npm install mand-mobile --save
  */
 
 /**
@@ -24,11 +24,9 @@ const vueConfig = {
                         overrideBrowserslist: ['Android >= 4.0', 'iOS >= 8'],
                     }),
                     require("postcss-pxtorem")({
-                        //独立vant项目，基准37.5
-                        rootValue: 37.5,
-                        //如果不是独立vant项目，则按下面规则返回基准数
-                        //rootValue ({ file }) { return file && file.dirname && file.dirname.indexOf("vant") > -1 ? 37.5 : 75; },
-                        propList: ['*'],
+                        rootValue: 100,
+                        minPixelValue: 2,
+                        propWhiteList: []
                     }),
                 ]
             }
@@ -52,11 +50,9 @@ const babelConfig = {
         [
             'import',
             {
-                libraryName: 'vant',
-                libraryDirectory: 'es',
-                style: true
-            },
-            'vant'
+                "libraryName": "mand-mobile",
+                "libraryDirectory": "lib"
+            }
         ]
     ]
 }
