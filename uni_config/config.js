@@ -117,6 +117,7 @@ module.exports = {
     uniName,
     moduleName,
     apiMode,
+    copyMode,
     vueConfig,
     getPagesJs,
     getApiUrl,
